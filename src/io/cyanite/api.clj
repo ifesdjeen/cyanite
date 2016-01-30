@@ -123,6 +123,10 @@
                                   {:suppress? true :status 400})))
         to    (or (parse-time until) (now!))]
     (query/run-query! store index engine from to target)))
+    (query/run-query! store index engine from to
+                      (if (seq? target)
+                        target
+                        [target]))))
 
 (defmethod dispatch :metrics
   [{{:keys [from to path agg]} :params :keys [index store engine]}]
