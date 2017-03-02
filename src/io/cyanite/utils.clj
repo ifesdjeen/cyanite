@@ -41,4 +41,8 @@
         (or (.get db k) def))
       java.lang.Object
       (toString [this]
-        (.toString db)))))
+        (str
+         "{ "
+         (clojure.string/join ", "
+                              (map (fn [[k v]] (str k " = " v)) db))
+         "}")))))
